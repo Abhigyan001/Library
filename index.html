@@ -7,9 +7,34 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  
+  <header id="main-header">
+    <h2 class="header-title">Book Library</h2>
+  </header>
 
+  <div class="container">
+    <div class="add-book">
+      <form id="book-details-form">
+        <div class="form-group">
+          <input type="text" id="book-title" placeholder="add book title"/>
+        </div>
+        <div class="form-group">
+          <input type="text" id="book-author" placeholder="add book author"/>
+        </div>
+        <div class="form-group">
+          <input type="number" id="book-pages" />
+        </div>
+        <select id="read-book">
+          <option>Have you read the book</option>
+          <option value="yes">Yes</option>
+          <option value="no">NO</option>
+        </select>
 
+        <div class="form-action">
+          <button type="submit" class="btn-submit">Add the Book</button>
+        </div>
+      </form>
+    </div>
+  </div>
   <script src="scripts/main.js"></script>
 </body>
 

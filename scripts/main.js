@@ -1,11 +1,7 @@
+let container = document.querySelector('.container');
 let myLibrary = [];
 
-function Book(
-  title,
-  author,
-  no_of_pages = 0,
-  have_read = false
-) {
+function Book(title, author, no_of_pages = 0, have_read = false) {
   this.title = title;
   this.author = author;
   this.no_of_pages = no_of_pages;
@@ -17,3 +13,7 @@ function addBookToLibrary() {
   myLibrary.push(book1);  
 }
 
+function displayBook() {
+  // create div el to contain the book object
+  let bookContainer = document.createElement('div');
+}
