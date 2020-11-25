@@ -1,10 +1,6 @@
 let container = document.querySelector('.container');
 let addBook = document.getElementById('add-book');
 let form = document.querySelector('.add-book-form');
-let bookTitle = document.getElementById('book-title').value;
-let bookAuthor = document.getElementById('book-author').value;
-let bookPages = document.getElementById('book-pages').value;
-let readChoice = document.getElementById('read-book');
 let submitForm = document.getElementById('submit-book');
 let message = document.querySelector('.message');
 let myLibrary = [];
@@ -24,29 +20,19 @@ function Book(title, author, no_of_pages = 0, have_read = false) {
   this.have_read = have_read;
 }
 
-function evaluateFormData(obj) {
-  if(obj.title === '' || obj.author === '' || obj.no_of_pages === 0 || obj.have_read === undefined) {
-    console.log('Please make sure all fields are filled & try again!');
-  } else {
-    myLibrary.push(obj);
-    console.log('You have successfully added a new book to the Library!');
-  }
-}
 
-function addBookToLibrary() {
+function addBookToLibrary(e)  {
   // determine if user already read the book
-  readChoice.addEventListener('change', (e) => {
-    if(e.target.value == 'yes') {
-      return true;
-    } else {
-      return false;
-    }
-  });
+  e.preventDefault();
+  let bookTitle = document.getElementById('book-title').value;
+  let bookAuthor = document.getElementById('book-author').value;
+  let bookPages = document.getElementById('book-pages').value;
+  let readChoice = document.getElementById('read-book').checked; 
 
   let userBook = new Book(bookTitle, bookAuthor, bookPages, readChoice);
+  myLibrary.push(userBook);
+  form.style.display = 'none';  
 
-  // evaluate form data and push to the myLibrary array
-  evaluateFormData(userBook);
 }
 
 submitForm.addEventListener('click', addBookToLibrary);
