@@ -35,41 +35,70 @@ function addBookToLibrary(e)  {
   myLibrary.push(userBook);
   localStorage.myLibrary = JSON.stringify(myLibrary);
   form.style.display = 'none';
-  inputField.reset();
+  bookTitle.value = '';
+  bookAuthor.value = '';
+  bookPages.value = 0;
+  readChoice.value = false;
+  // inputField.reset();
 }
 
-function displayBook() {
+// delete book from the library
+function deleteBookFromLibrary(book) {
+  myLibrary.splice(book, 1);
+  localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
+}
+
+// get index of each book in the library
+function bookIndex(books, index) {
+  for(let i = 0; i < books.length; i++) {
+    index = i;
+  }
+
+  return index;
+}
+
+function displayBooks() {
+
+  // retrieve books from localStorage
+  let libraryBooks = JSON.parse(localStorage.getItem('myLibrary'));
+
   // create div el to contain the book object
   let bookParent = document.querySelector('#books');
   let book = document.createElement('div');
   let bookBody = document.createElement('div');
-  let h3 = document.createElement('h3');
+  let bookTitle = document.createElement('h3');
   let delBtn = document.createElement('button');
   let bookFooter = document.createElement('div');
+  let index;
+  let id = bookIndex(libraryBooks, index);
+  book.setAttribute('id', id);
 
-  book.classList = 'card col-4';
-  bookBody.classList = 'card-body';
-  bookFooter.classList = 'card-footer';
-  delBtn.classList = 'btn btn-md btn-danger';
+  // add book title to h3 tag
+  bookParent.innerHTML = libraryBooks.forEach(bk => {
+    book.classList.add('card', 'col-4');
+    bookBody.classList = 'card-body';
+    bookFooter.classList = 'card-footer';
+    delBtn.classList = 'btn btn-md btn-danger';
+    bookTitle.textContent = bk.title;
+    if(bk) {
+      bookFooter.appendChild(delBtn);
+      delBtn.textContent = 'Delete Book';
+    }
+  });
 
-  //console.log('Here!');
-  // for(let i = 0; i < myLibrary.length; i++) {
-  //   console.log(myLibrary[i]);
-  // }
+  delBtn.addEventListener('click', (book_id) => {
+    book_id = book.getAttribute('id');
+    deleteBookFromLibrary(book_id);
+  });
 
-  // for(let i = 0; i < myLibrary.length; i++) {
-  //   h3.textContent = myLibrary[i][0];
-  //   delBtn.textContent = 'Delete Book';
-  //   bookBody.appendChild(h3);
-  //   bookFooter.appendChild(delBtn);
-  //   book.appendChild(book);
-  //   book.appendChild(bookFooter);
-  //   bookParent.appendChild(book);
-  // }
+  bookBody.appendChild(bookTitle);
+  book.appendChild(bookBody);
+  book.appendChild(bookFooter);
+  bookParent.appendChild(book);
 }
 
 
 
 submitForm.addEventListener('click', addBookToLibrary);
 
-displayBook();
+displayBooks();
