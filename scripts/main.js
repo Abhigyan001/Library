@@ -1,15 +1,13 @@
 let container = document.querySelector('.container');
 let addBook = document.getElementById('add-book');
 let form = document.querySelector('.add-book-form');
+let inputField = document.querySelector('.book-details-form');
 let submitForm = document.getElementById('submit-book');
 let message = document.querySelector('.message');
-let bookTitle = document.getElementById('book-title').value;
-let bookAuthor = document.getElementById('book-author').value;
-let bookPages = document.getElementById('book-pages').value;
-let readChoice = document.getElementById('read-book').checked; 
+
 let myLibrary = [];
 
-let userBook = new Book(bookTitle, bookAuthor, bookPages, readChoice);
+
 
 // hide form
 form.style.display = 'none';
@@ -28,7 +26,16 @@ function Book(title, author, no_of_pages = 0, have_read = false) {
 
 function addBookToLibrary(e)  {
   e.preventDefault();
+  let bookTitle = document.getElementById('book-title');
+  let bookAuthor = document.getElementById('book-author');
+  let bookPages = document.getElementById('book-pages');
+  let readChoice = document.getElementById('read-book');
+  let userBook = new Book(bookTitle.value, bookAuthor.value, bookPages.value, readChoice.checked);
+  
   myLibrary.push(userBook);
+  localStorage.myLibrary = JSON.stringify(myLibrary);
+  form.style.display = 'none';
+  inputField.reset();
 }
 
 function displayBook() {
@@ -45,7 +52,7 @@ function displayBook() {
   bookFooter.classList = 'card-footer';
   delBtn.classList = 'btn btn-md btn-danger';
 
-  console.log('Here!');
+  //console.log('Here!');
   // for(let i = 0; i < myLibrary.length; i++) {
   //   console.log(myLibrary[i]);
   // }
@@ -63,6 +70,6 @@ function displayBook() {
 
 
 
-submitForm.addEventListener('submit', addBookToLibrary);
+submitForm.addEventListener('click', addBookToLibrary);
 
 displayBook();
