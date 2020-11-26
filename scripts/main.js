@@ -5,9 +5,7 @@ let inputField = document.querySelector('.book-details-form');
 let submitForm = document.getElementById('submit-book');
 let message = document.querySelector('.message');
 
-let myLibrary = [];
-
-
+let myLibrary = [{"title":"The Sherlock Holmes","author":"assd","no_of_pages":"12","have_read":true},{"title":"The New Book","author":"assd","no_of_pages":"12","have_read":true}];
 
 // hide form
 form.style.display = 'none';
@@ -57,7 +55,7 @@ function bookIndex(books, index) {
 }
 
 function displayBooks() {
-
+  for(let i=0; i < myLibrary.length; i++) {
   // retrieve books from localStorage
   let libraryBooks = JSON.parse(localStorage.getItem('myLibrary'));
 
@@ -72,20 +70,6 @@ function displayBooks() {
   let id = bookIndex(libraryBooks, index);
   book.setAttribute('id', id);
 
-  // add book title to h3 tag
-  for(let i=0; i < libraryBooks.length; i++) {
-    book.classList.add('card', 'col-4');
-    bookBody.classList = 'card-body';
-    bookFooter.classList = 'card-footer';
-    delBtn.classList = 'btn btn-md btn-danger';
-    bookTitle.textContent = libraryBooks[i].title;
-    if(libraryBooks[i]) {
-      bookFooter.appendChild(delBtn);
-      delBtn.textContent = 'Delete Book';
-    }
-  }
-  
-
   delBtn.addEventListener('click', (book_id) => {
     book_id = book.getAttribute('id');
     deleteBookFromLibrary(book_id); 
@@ -96,6 +80,19 @@ function displayBooks() {
   book.appendChild(bookBody);
   book.appendChild(bookFooter);
   bookParent.appendChild(book);
+  
+  // add book title to h3 tag
+  
+    book.classList.add('card', 'col-4');
+    bookBody.classList = 'card-body';
+    bookFooter.classList = 'card-footer';
+    delBtn.classList = 'btn btn-md btn-danger';
+    bookTitle.textContent = myLibrary[i].title;
+    if(myLibrary[i]) {
+      bookFooter.appendChild(delBtn);
+      delBtn.textContent = 'Delete Book';
+    }
+  }
 }
 
 
