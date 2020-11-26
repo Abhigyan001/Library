@@ -65,7 +65,7 @@ function displayBooks() {
   
 
   for(let i=0; i < libraryBooks.length; i++) {
-    // create div el to contain the book object
+    // create DOM elements
     let bookParent = document.querySelector('#books');
     let book = document.createElement('div');
     let bookBody = document.createElement('div');
@@ -74,6 +74,7 @@ function displayBooks() {
     let authorForBook = document.createElement('p');
     let delBtn = document.createElement('button');
     let bookFooter = document.createElement('div');
+    let readButton = document.createElement('button');
     let index;
     let id = bookIndex(libraryBooks, index);
     book.setAttribute('id', id);
@@ -91,12 +92,11 @@ function displayBooks() {
     book.appendChild(bookFooter);
     bookParent.appendChild(book);
   
-  // add book title to h3 tag
-  
     book.classList.add('card', 'col-5', 'mr-3', 'mt-4');
     bookBody.classList = 'card-body';
     bookFooter.classList = 'card-footer';
-    delBtn.classList = 'btn btn-md btn-danger';
+    delBtn.classList = 'btn btn-sm btn-danger';
+    readButton.classList = 'btn btn-sm btn-info ml-2';
     title.textContent = `Title: ${libraryBooks[i].title}`;
     authorForBook.textContent = `Author: ${libraryBooks[i].author}`;
     numOfPages.textContent = `Pages: ${libraryBooks[i].no_of_pages}`
@@ -104,6 +104,9 @@ function displayBooks() {
     if(libraryBooks[i]) {
       bookFooter.appendChild(delBtn);
       delBtn.textContent = 'Delete Book';
+      readButton.textContent = 'I have read the book';
+
+      bookFooter.appendChild(readButton);
     }
   }
 }
