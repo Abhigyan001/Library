@@ -7,6 +7,13 @@ let message = document.querySelector('.message');
 
 let myLibrary = [];
 
+function Book(title, author, no_of_pages = 0, have_read = false) {
+  this.title = title;
+  this.author = author;
+  this.no_of_pages = no_of_pages;
+  this.have_read = have_read;
+}
+
 // hide form
 form.style.display = 'none';
 
@@ -15,28 +22,18 @@ addBook.addEventListener('click', function() {
   form.style.display = 'block';
 });
 
-function Book(title, author, no_of_pages = 0, have_read = false) {
-  this.title = title;
-  this.author = author;
-  this.no_of_pages = no_of_pages;
-  this.have_read = have_read;
-}
-
 function addBookToLibrary(e)  {
   e.preventDefault();
-  let bookTitle = document.getElementById('book-title');
-  let bookAuthor = document.getElementById('book-author');
-  let bookPages = document.getElementById('book-pages');
-  let readChoice = document.getElementById('read-book');
-  let userBook = new Book(bookTitle.value, bookAuthor.value, bookPages.value, readChoice.checked);
+  let bookTitle = document.getElementById('book-title').value;
+  let bookAuthor = document.getElementById('book-author').value;
+  let bookPages = document.getElementById('book-pages').value;
+  let readChoice = document.getElementById('read-book').checked;
+  let userBook = new Book(bookTitle, bookAuthor, bookPages, readChoice);
   
-  myLibrary.push(userBook);  
-  var existingEntries = JSON.parse(localStorage.getItem('myLibrary'));
-  if (existingEntries == null) {
-    existingEntries = [];
-  }
-  existingEntries.push(userBook);
-  localStorage.setItem('myLibrary', JSON.stringify(existingEntries));
+  myLibrary.push(userBook);
+
+  localStorage.setItem(`myLibrary`, JSON.stringify(myLibrary));
+  
 
   form.style.display = 'none';
   bookTitle.value = '';
@@ -63,7 +60,8 @@ function bookIndex(books, index) {
 function displayBooks() {
   
   // retrieve books from localStorage
-    let libraryBooks = JSON.parse(localStorage.getItem('myLibrary'));
+  let libraryBooks = JSON.parse(localStorage.getItem('myLibrary'));
+  
 
   for(let i=0; i < libraryBooks.length; i++) {
     // create div el to contain the book object
@@ -106,4 +104,15 @@ function displayBooks() {
 
 submitForm.addEventListener('click', addBookToLibrary);
 
-displayBooks();
+function showBooks() {
+  if (!localStorage.myLibrary) {
+    displayBooks();
+  } else {
+    let savedData = localStorage.getItem('myLibrary');
+    data = JSON.parse(savedData);
+    myLibrary = data;
+    displayBooks();
+  }
+}
+
+showBooks();
