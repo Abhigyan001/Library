@@ -5,7 +5,7 @@ let inputField = document.querySelector('.book-details-form');
 let submitForm = document.getElementById('submit-book');
 let message = document.querySelector('.message');
 
-let myLibrary = [{"title":"The Sherlock Holmes","author":"assd","no_of_pages":"12","have_read":true},{"title":"The New Book","author":"assd","no_of_pages":"12","have_read":true}];
+let myLibrary = [];
 
 // hide form
 form.style.display = 'none';
@@ -31,7 +31,13 @@ function addBookToLibrary(e)  {
   let userBook = new Book(bookTitle.value, bookAuthor.value, bookPages.value, readChoice.checked);
   
   myLibrary.push(userBook);  
-  localStorage.myLibrary = JSON.stringify(myLibrary);
+  var existingEntries = JSON.parse(localStorage.getItem('myLibrary'));
+  if (existingEntries == null) {
+    existingEntries = [];
+  }
+  existingEntries.push(userBook);
+  localStorage.setItem('myLibrary', JSON.stringify(existingEntries));
+
   form.style.display = 'none';
   bookTitle.value = '';
   bookAuthor.value = '';
@@ -55,31 +61,32 @@ function bookIndex(books, index) {
 }
 
 function displayBooks() {
-  for(let i=0; i < myLibrary.length; i++) {
+  
   // retrieve books from localStorage
-  let libraryBooks = JSON.parse(localStorage.getItem('myLibrary'));
+    let libraryBooks = JSON.parse(localStorage.getItem('myLibrary'));
 
-  // create div el to contain the book object
-  let bookParent = document.querySelector('#books');
-  let book = document.createElement('div');
-  let bookBody = document.createElement('div');
-  let bookTitle = document.createElement('h2');
-  let delBtn = document.createElement('button');
-  let bookFooter = document.createElement('div');
-  let index;
-  let id = bookIndex(libraryBooks, index);
-  book.setAttribute('id', id);
+  for(let i=0; i < libraryBooks.length; i++) {
+    // create div el to contain the book object
+    let bookParent = document.querySelector('#books');
+    let book = document.createElement('div');
+    let bookBody = document.createElement('div');
+    let bookTitle = document.createElement('h2');
+    let delBtn = document.createElement('button');
+    let bookFooter = document.createElement('div');
+    let index;
+    let id = bookIndex(libraryBooks, index);
+    book.setAttribute('id', id);
 
-  delBtn.addEventListener('click', (book_id) => {
-    book_id = book.getAttribute('id');
-    deleteBookFromLibrary(book_id); 
-    bookParent.removeChild(book);   
-  });
+    delBtn.addEventListener('click', (book_id) => {
+      book_id = book.getAttribute('id');
+      deleteBookFromLibrary(book_id); 
+      bookParent.removeChild(book);   
+    });
 
-  bookBody.appendChild(bookTitle);
-  book.appendChild(bookBody);
-  book.appendChild(bookFooter);
-  bookParent.appendChild(book);
+    bookBody.appendChild(bookTitle);
+    book.appendChild(bookBody);
+    book.appendChild(bookFooter);
+    bookParent.appendChild(book);
   
   // add book title to h3 tag
   
@@ -87,8 +94,8 @@ function displayBooks() {
     bookBody.classList = 'card-body';
     bookFooter.classList = 'card-footer';
     delBtn.classList = 'btn btn-md btn-danger';
-    bookTitle.textContent = myLibrary[i].title;
-    if(myLibrary[i]) {
+    bookTitle.textContent = libraryBooks[i].title;
+    if(libraryBooks[i]) {
       bookFooter.appendChild(delBtn);
       delBtn.textContent = 'Delete Book';
     }
