@@ -32,20 +32,19 @@ function addBookToLibrary(e)  {
   let readChoice = document.getElementById('read-book');
   let userBook = new Book(bookTitle.value, bookAuthor.value, bookPages.value, readChoice.checked);
   
-  myLibrary.push(userBook);
+  myLibrary.push(userBook);  
   localStorage.myLibrary = JSON.stringify(myLibrary);
   form.style.display = 'none';
   bookTitle.value = '';
   bookAuthor.value = '';
   bookPages.value = 0;
-  readChoice.value = false;
-  // inputField.reset();
+  readChoice.value = false;  
 }
 
 // delete book from the library
-function deleteBookFromLibrary(book) {
+function deleteBookFromLibrary(book) {  
   myLibrary.splice(book, 1);
-  localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
+  localStorage.setItem('myLibrary', JSON.stringify(myLibrary));  
 }
 
 // get index of each book in the library
@@ -66,7 +65,7 @@ function displayBooks() {
   let bookParent = document.querySelector('#books');
   let book = document.createElement('div');
   let bookBody = document.createElement('div');
-  let bookTitle = document.createElement('h3');
+  let bookTitle = document.createElement('h2');
   let delBtn = document.createElement('button');
   let bookFooter = document.createElement('div');
   let index;
@@ -74,21 +73,23 @@ function displayBooks() {
   book.setAttribute('id', id);
 
   // add book title to h3 tag
-  bookParent.innerHTML = libraryBooks.forEach(bk => {
+  for(let i=0; i < libraryBooks.length; i++) {
     book.classList.add('card', 'col-4');
     bookBody.classList = 'card-body';
     bookFooter.classList = 'card-footer';
     delBtn.classList = 'btn btn-md btn-danger';
-    bookTitle.textContent = bk.title;
-    if(bk) {
+    bookTitle.textContent = libraryBooks[i].title;
+    if(libraryBooks[i]) {
       bookFooter.appendChild(delBtn);
       delBtn.textContent = 'Delete Book';
     }
-  });
+  }
+  
 
   delBtn.addEventListener('click', (book_id) => {
     book_id = book.getAttribute('id');
-    deleteBookFromLibrary(book_id);
+    deleteBookFromLibrary(book_id); 
+    bookParent.removeChild(book);   
   });
 
   bookBody.appendChild(bookTitle);
