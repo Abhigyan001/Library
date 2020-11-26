@@ -39,7 +39,8 @@ function addBookToLibrary(e)  {
   bookTitle.value = '';
   bookAuthor.value = '';
   bookPages.value = 0;
-  readChoice.value = false;  
+  readChoice.value = false;
+  location.reload();
 }
 
 // delete book from the library
@@ -68,7 +69,9 @@ function displayBooks() {
     let bookParent = document.querySelector('#books');
     let book = document.createElement('div');
     let bookBody = document.createElement('div');
-    let bookTitle = document.createElement('h2');
+    let title = document.createElement('h6');
+    let numOfPages = document.createElement('p');
+    let authorForBook = document.createElement('p');
     let delBtn = document.createElement('button');
     let bookFooter = document.createElement('div');
     let index;
@@ -81,18 +84,23 @@ function displayBooks() {
       bookParent.removeChild(book);   
     });
 
-    bookBody.appendChild(bookTitle);
+    bookBody.appendChild(title);
+    bookBody.appendChild(authorForBook);
+    bookBody.appendChild(numOfPages);
     book.appendChild(bookBody);
     book.appendChild(bookFooter);
     bookParent.appendChild(book);
   
   // add book title to h3 tag
   
-    book.classList.add('card', 'col-4');
+    book.classList.add('card', 'col-5', 'mr-3', 'mt-4');
     bookBody.classList = 'card-body';
     bookFooter.classList = 'card-footer';
     delBtn.classList = 'btn btn-md btn-danger';
-    bookTitle.textContent = libraryBooks[i].title;
+    title.textContent = `Title: ${libraryBooks[i].title}`;
+    authorForBook.textContent = `Author: ${libraryBooks[i].author}`;
+    numOfPages.textContent = `Pages: ${libraryBooks[i].no_of_pages}`
+
     if(libraryBooks[i]) {
       bookFooter.appendChild(delBtn);
       delBtn.textContent = 'Delete Book';
@@ -104,7 +112,7 @@ function displayBooks() {
 
 submitForm.addEventListener('click', addBookToLibrary);
 
-function showBooks() {
+(function showBooks() {
   if (!localStorage.myLibrary) {
     displayBooks();
   } else {
@@ -113,6 +121,4 @@ function showBooks() {
     myLibrary = data;
     displayBooks();
   }
-}
-
-showBooks();
+})();
