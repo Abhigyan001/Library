@@ -38,7 +38,7 @@ And run the app on your local machine in the browser of your choice.
 ## :handshake: Contributing
 
 Contributions, issues and feature requests are welcome!
-Feel free to check the [issues page](issues/).
+Feel free to check the [issues page](https://github.com/Abhigyan001/Library/issues).
 
 ## Show your support
 
