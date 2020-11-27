@@ -12,9 +12,7 @@ function Book(title, author, no_of_pages = 0, have_read) {
   this.author = author;
   this.no_of_pages = no_of_pages;
   this.have_read = have_read;
-  this.toggleStatus = function() {
-    !(this.have_read);
-  }
+  
 }
 
 // toggle read status
@@ -93,9 +91,8 @@ function displayBooks() {
     let readButton = document.createElement('button');
     let index;
     let id = bookIndex(libraryBooks, index);
-    book.setAttribute('id', id);
-    let readvalue = document.createElement('p');
-    let readstatus = libraryBooks[i].have_read;
+    book.setAttribute('id', id);    
+    let readstatus = libraryBooks[i].have_read;    
 
     delBtn.addEventListener('click', (book_id) => {
       book_id = book.getAttribute('id');
@@ -103,19 +100,29 @@ function displayBooks() {
       bookParent.removeChild(book);   
     });
 
-    if (readstatus == true ) {
-      readButton.innerHTML = 'I have read the book';
+    if (readstatus === true) {
+      readButton.textContent = 'I have read the book';
       readButton.classList = 'btn btn-sm btn-success ml-2';
-    } else {
+    } else if (readstatus === false){
       readButton.innerHTML = 'I have not read the book';
       readButton.classList = 'btn btn-sm btn-info ml-2';
     }
+    readButton.addEventListener('click', () => {
+      
+      libraryBooks[i].have_read = !libraryBooks[i].have_read;
+      localStorage.setItem(`myLibrary`, JSON.stringify(myLibrary));
 
-    
+      if (libraryBooks[i].have_read === true){
+        readButton.textContent = 'I have read the book';
+        readButton.classList = 'btn btn-sm btn-success ml-2';        
+      } else {
+        readButton.innerHTML = 'I have not read the book';
+        readButton.classList = 'btn btn-sm btn-info ml-2';        
+      } 
+    });
     bookBody.appendChild(title);
     bookBody.appendChild(authorForBook);
-    bookBody.appendChild(numOfPages);
-    bookBody.appendChild(readvalue);
+    bookBody.appendChild(numOfPages);    
     book.appendChild(bookBody);
     book.appendChild(bookFooter);
     bookParent.appendChild(book);
@@ -126,34 +133,15 @@ function displayBooks() {
     delBtn.classList = 'btn btn-sm btn-danger ';
     title.textContent = `Title: ${libraryBooks[i].title}`;
     authorForBook.textContent = `Author: ${libraryBooks[i].author}`;
-    numOfPages.textContent = `Pages: ${libraryBooks[i].no_of_pages}`;
-    readvalue.textContent = `Read Book: ${libraryBooks[i].have_read}`;
-
-
-
+    numOfPages.textContent = `Pages: ${libraryBooks[i].no_of_pages}`; 
 
     if(libraryBooks[i]) {
       bookFooter.appendChild(delBtn);
       delBtn.textContent = 'Delete Book';
-
-      bookFooter.appendChild(readButton);
-      readButton.addEventListener('click', function() {
-        !libraryBooks[i].toggleStatus;
-        // if (readstatus == true) {          
-        //   // readButton.innerHTML = 'I have read the book';
-        //   // readButton.classList = 'btn btn-sm btn-success ml-2';
-        //   readstatus = false;
-        // } else {        
-        // // readButton.innerHTML = 'I have not read the book';
-        // // readButton.classList = 'btn btn-sm btn-info ml-2';
-        // readstatus = true;
-        // }
-      });
+      bookFooter.appendChild(readButton);      
     }
   }
 }
-
-
 
 submitForm.addEventListener('click', addBookToLibrary);
 
