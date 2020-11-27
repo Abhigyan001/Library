@@ -17,17 +17,18 @@
       <div class="add-book-form mt-3">
         <form id="book-details-form">
           <div class="form-group">
-            <input type="text" id="book-title" placeholder="add book title" required/>
+            <input type="text" class="form-control" id="book-title" placeholder="add book title" required/>
           </div>
           <div class="form-group">
-            <input type="text" id="book-author" placeholder="add book author" required/>
+            <input type="text" class="form-control" id="book-author" placeholder="add book author" required/>
           </div>
           <div class="form-group">
-            <input type="number" id="book-pages" placeholder="number of pages" required/>
+            <input type="number" class="form-control" id="book-pages" placeholder="number of pages" required/>
           </div>
-          <div class="form-group">
-            <input type="checkbox" id="read-book">
-            <p>Check the box if you have read the book.</p> 
+          <div class="form-check">
+            <label for="read-book" class="form-check-label">
+              <input type="checkbox" class="form-check-input" id="read-book"> I have read the book
+            </label> 
           </div>
           
 

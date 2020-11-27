@@ -14,12 +14,9 @@ function Book(title, author, no_of_pages = 0, have_read = false) {
   this.have_read = have_read;
 }
 
-// hide form
-form.style.display = 'none';
-
 // display form
 addBook.addEventListener('click', function() {
-  form.style.display = 'block';
+  form.classList.toggle('show-form');
 });
 
 function addBookToLibrary(e)  {
