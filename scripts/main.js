@@ -12,6 +12,9 @@ function Book(title, author, no_of_pages = 0, have_read) {
   this.author = author;
   this.no_of_pages = no_of_pages;
   this.have_read = have_read;
+  this.toggleStatus = function() {
+    !(this.have_read);
+  }
 }
 
 // toggle read status
@@ -70,6 +73,8 @@ function bookIndex(books, index) {
 }
 
 function displayBooks() {
+
+  
   
   // retrieve books from localStorage
   let libraryBooks = JSON.parse(localStorage.getItem('myLibrary'));
@@ -89,6 +94,8 @@ function displayBooks() {
     let index;
     let id = bookIndex(libraryBooks, index);
     book.setAttribute('id', id);
+    let readvalue = document.createElement('p');
+    let readstatus = libraryBooks[i].have_read;
 
     delBtn.addEventListener('click', (book_id) => {
       book_id = book.getAttribute('id');
@@ -96,7 +103,7 @@ function displayBooks() {
       bookParent.removeChild(book);   
     });
 
-    if (this.have_read == true ) {
+    if (readstatus == true ) {
       readButton.innerHTML = 'I have read the book';
       readButton.classList = 'btn btn-sm btn-success ml-2';
     } else {
@@ -108,6 +115,7 @@ function displayBooks() {
     bookBody.appendChild(title);
     bookBody.appendChild(authorForBook);
     bookBody.appendChild(numOfPages);
+    bookBody.appendChild(readvalue);
     book.appendChild(bookBody);
     book.appendChild(bookFooter);
     bookParent.appendChild(book);
@@ -118,7 +126,11 @@ function displayBooks() {
     delBtn.classList = 'btn btn-sm btn-danger ';
     title.textContent = `Title: ${libraryBooks[i].title}`;
     authorForBook.textContent = `Author: ${libraryBooks[i].author}`;
-    numOfPages.textContent = `Pages: ${libraryBooks[i].no_of_pages}`
+    numOfPages.textContent = `Pages: ${libraryBooks[i].no_of_pages}`;
+    readvalue.textContent = `Read Book: ${libraryBooks[i].have_read}`;
+
+
+
 
     if(libraryBooks[i]) {
       bookFooter.appendChild(delBtn);
@@ -126,13 +138,16 @@ function displayBooks() {
 
       bookFooter.appendChild(readButton);
       readButton.addEventListener('click', function() {
-        if (readButton.textContent == 'I have not read the book') {
-          readButton.innerHTML = 'I have read the book';
-          readButton.classList = 'btn btn-sm btn-success ml-2';
-        } else {
-        readButton.innerHTML = 'I have not read the book';
-        readButton.classList = 'btn btn-sm btn-info ml-2';
-        }
+        !libraryBooks[i].toggleStatus;
+        // if (readstatus == true) {          
+        //   // readButton.innerHTML = 'I have read the book';
+        //   // readButton.classList = 'btn btn-sm btn-success ml-2';
+        //   readstatus = false;
+        // } else {        
+        // // readButton.innerHTML = 'I have not read the book';
+        // // readButton.classList = 'btn btn-sm btn-info ml-2';
+        // readstatus = true;
+        // }
       });
     }
   }
