@@ -1,6 +1,15 @@
 # Project: Library
 This application was built as an introductory project to the Microverse Javascript module. The main focus was to exhibit the authors' basic understanding of the JavaScript programming language. Library is an application on which users can create a book, inputing the details about the book ( i.e title, author, number of pages, & whether they have read it or not). To achieve this, we made use of the localStorage to store all the information provided by the users of the browser & retrieve it whenever to display each book object in a structured way on the user's browser.
 
+## Landing page
+
+![screenshot](./images/ss1.PNG)
+
+## Live Link
+
+[Live demo](https://mylibrary123.netlify.app/)
+
+
 ## Technologies used:
 - JavaScript programming language
 - Bootstrap
