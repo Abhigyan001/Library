@@ -7,7 +7,7 @@ let message = document.querySelector('.message');
 
 let myLibrary = [];
 
-function Book(title, author, no_of_pages = 0, have_read = false) {
+function Book(title, author, no_of_pages = 0, have_read) {
   this.title = title;
   this.author = author;
   this.no_of_pages = no_of_pages;
@@ -15,9 +15,7 @@ function Book(title, author, no_of_pages = 0, have_read = false) {
 }
 
 // toggle read status
-Book.prototype.readStatus = function (e) {
-  e.target.toggle(this.have_read);
-}
+
 
 // display form
 addBook.addEventListener('click', function() {
@@ -98,17 +96,15 @@ function displayBooks() {
       bookParent.removeChild(book);   
     });
 
-    function toggleBtnText(status) {
-      if(status) {
-        readButton.textContent = 'I have not read the book';
-        readButton.classList = 'btn btn-sm btn-info ml-2';
-      } else {
-        readButton.textContent = 'I have read the book';
-        readButton.classList = 'btn btn-sm btn-success ml-2';
-      }
+    if (this.have_read == true ) {
+      readButton.innerHTML = 'I have read the book';
+      readButton.classList = 'btn btn-sm btn-success ml-2';
+    } else {
+      readButton.innerHTML = 'I have not read the book';
+      readButton.classList = 'btn btn-sm btn-info ml-2';
     }
 
-    readButton.textContent = 'I have not read the book';
+    
     bookBody.appendChild(title);
     bookBody.appendChild(authorForBook);
     bookBody.appendChild(numOfPages);
@@ -129,7 +125,15 @@ function displayBooks() {
       delBtn.textContent = 'Delete Book';
 
       bookFooter.appendChild(readButton);
-      readButton.addEventListener('click', console.log(libraryBooks[i].readStatus));
+      readButton.addEventListener('click', function() {
+        if (readButton.textContent == 'I have not read the book') {
+          readButton.innerHTML = 'I have read the book';
+          readButton.classList = 'btn btn-sm btn-success ml-2';
+        } else {
+        readButton.innerHTML = 'I have not read the book';
+        readButton.classList = 'btn btn-sm btn-info ml-2';
+        }
+      });
     }
   }
 }
