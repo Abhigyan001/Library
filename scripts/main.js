@@ -23,7 +23,7 @@ addBook.addEventListener('click', () => {
   form.classList.toggle('show-form');
 });
 
-function addBookToLibrary(e) {
+const addBookToLibrary = (e) => {
   e.preventDefault();
   const bookTitle = document.getElementById('book-title').value;
   const bookAuthor = document.getElementById('book-author').value;
@@ -32,7 +32,7 @@ function addBookToLibrary(e) {
   const userBook = new Book(bookTitle, bookAuthor, bookPages, readChoice);
 
   if (bookTitle && bookAuthor && bookPages) {
-    myLibrary.push(userBook);
+    myLibrary.unshift(userBook);
 
     localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
 
@@ -50,25 +50,25 @@ function addBookToLibrary(e) {
       }, 3000,
     );
   }
-}
+};
 
 // delete book from the library
-function deleteBookFromLibrary(book) {
+const deleteBookFromLibrary = (book) => {
   myLibrary.splice(book, 1);
   localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
   location.reload();
-}
+};
 
 // get index of each book in the library
-function bookIndex(books, index) {
+const bookIndex = (books, index) => {
   for (let i = 0; i < books.length; i += 1) {
     index = i;
   }
 
   return index;
-}
+};
 
-function displayBooks() {
+const displayBooks = () => {
   // retrieve books from localStorage
   const libraryBooks = JSON.parse(localStorage.getItem('myLibrary'));
 
@@ -134,7 +134,7 @@ function displayBooks() {
       bookFooter.appendChild(readButton);
     }
   }
-}
+};
 
 submitForm.addEventListener('click', addBookToLibrary);
 
