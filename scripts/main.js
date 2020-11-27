@@ -26,18 +26,24 @@ function addBookToLibrary(e)  {
   let bookPages = document.getElementById('book-pages').value;
   let readChoice = document.getElementById('read-book').checked;
   let userBook = new Book(bookTitle, bookAuthor, bookPages, readChoice);
-  
-  myLibrary.push(userBook);
+  if (bookTitle && bookAuthor && bookPages) {
+    myLibrary.push(userBook);
 
-  localStorage.setItem(`myLibrary`, JSON.stringify(myLibrary));
-  
+    localStorage.setItem(`myLibrary`, JSON.stringify(myLibrary));
+    
 
-  form.style.display = 'none';
-  bookTitle.value = '';
-  bookAuthor.value = '';
-  bookPages.value = 0;
-  readChoice.value = false;
-  location.reload();
+    form.style.display = 'none';
+    bookTitle.value = '';
+    bookAuthor.value = '';
+    bookPages.value = 0;
+    readChoice.value = false;
+    location.reload(); 
+    
+  } else {
+    document.getElementById('error').style.display = 'block';
+    setTimeout(function() {document.getElementById('error').style.display = 'none';}, 3000);    
+  }
+  
 }
 
 // delete book from the library
@@ -89,10 +95,10 @@ function displayBooks() {
     book.appendChild(bookFooter);
     bookParent.appendChild(book);
   
-    book.classList.add('card', 'col-5', 'mr-3', 'mt-4');
+    book.classList.add('card','col-lg-4','col-sm-12', 'col-md-5', 'mx-4', 'mt-4');
     bookBody.classList = 'card-body';
     bookFooter.classList = 'card-footer';
-    delBtn.classList = 'btn btn-sm btn-danger';
+    delBtn.classList = 'btn btn-sm btn-danger ';
     readButton.classList = 'btn btn-sm btn-info ml-2';
     title.textContent = `Title: ${libraryBooks[i].title}`;
     authorForBook.textContent = `Author: ${libraryBooks[i].author}`;

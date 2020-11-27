@@ -13,9 +13,11 @@
       <h2 class="header-title">The Book Library</h2>
     </div>
     <div class="container">     
-      <button id="add-book" class="btn btn-info">Add New Book</button>
-      <div class="add-book-form mt-3">
-        <form id="book-details-form">
+      <section class="text-center">
+        <button id="add-book" class="btn btn-info">Add New Book</button>
+      <p id="error" class="text-danger para">The Inputs are not filled properly</p>
+      <div class="add-book-form mt-3 show-form">
+        <form id="book-details-form " >
           <div class="form-group">
             <input type="text" class="form-control" id="book-title" placeholder="add book title" required/>
           </div>
@@ -37,6 +39,7 @@
           </div>
         </form>
       </div>
+      </section>
        <div id="books" class="row mt-5 text-start">
          <div class="col-12 text-center">
            <h2 class="title">Books Information</h2>
