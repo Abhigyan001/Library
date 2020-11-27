@@ -1,0 +1,9 @@
+.show-form,
+.para {
+  display: none;
+}
+
+.add-book-form {
+  max-width: 600px;
+  margin: 0 auto;
+}

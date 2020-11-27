@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Library</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+  </head>
+  <body>
+    <div id="main-header" class="jumbotron text-center">
+      <h2 class="header-title">The Book Library</h2>
+    </div>
+    <div class="container">     
+      <section class="text-center">
+        <button id="add-book" class="btn btn-info">Add New Book</button>
+      <p id="error" class="text-danger para">The Inputs are not filled properly</p>
+      <div class="add-book-form mt-3 show-form">
+        <form id="book-details-form " >
+          <div class="form-group">
+            <input type="text" class="form-control" id="book-title" placeholder="add book title" required/>
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" id="book-author" placeholder="add book author" required/>
+          </div>
+          <div class="form-group">
+            <input type="number" class="form-control" id="book-pages" placeholder="number of pages" required/>
+          </div>
+          <div class="form-check">
+            <label for="read-book" class="form-check-label">
+              <input type="checkbox" class="form-check-input" id="read-book"> I have read the book
+            </label> 
+          </div>
+          
+
+          <div class="form-action mt-3">
+            <button type="submit" class="btn btn-success" id="submit-book" >Add the Book</button>
+          </div>
+        </form>
+      </div>
+      </section>
+       <div id="books" class="row mt-5 text-start">
+         <div class="col-12 text-center">
+           <h2 class="title">Books Information</h2>
+         </div>
+       </div>
+    </div>
+    <script src="scripts/main.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> 
+  </body>
+</html>
