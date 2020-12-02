@@ -15,9 +15,6 @@ function Book(title, author, no_of_pages = 0, have_read) {
   this.have_read = have_read;
 }
 
-// toggle read status
-
-
 // display form
 addBook.addEventListener('click', () => {
   form.classList.toggle('show-form');
@@ -72,7 +69,6 @@ const displayBooks = () => {
   // retrieve books from localStorage
   const libraryBooks = JSON.parse(localStorage.getItem('myLibrary'));
 
-
   for (let i = 0; i < libraryBooks.length; i += 1) {
     // create DOM elements
     const bookParent = document.querySelector('#books');
@@ -87,7 +83,7 @@ const displayBooks = () => {
     let index;
     const id = bookIndex(libraryBooks, index);
     book.setAttribute('id', id);
-    const readstatus = libraryBooks[i].have_read;
+    let readstatus = libraryBooks[i].have_read;
 
     delBtn.addEventListener('click', (book_id) => {
       book_id = book.getAttribute('id');
@@ -95,24 +91,26 @@ const displayBooks = () => {
       bookParent.removeChild(book);
     });
 
-    if (readstatus === true) {
+    if (readstatus) {
       readButton.textContent = 'I have read the book';
       readButton.classList = 'btn btn-sm btn-success ml-2';
-    } else if (readstatus === false) {
+    } else {
       readButton.innerHTML = 'I have not read the book';
       readButton.classList = 'btn btn-sm btn-info ml-2';
     }
-    readButton.addEventListener('click', () => {
-      libraryBooks[i].have_read = !libraryBooks[i].have_read;
 
-      if (libraryBooks[i].have_read === true) {
-        readButton.textContent = 'I have read the book';
-        readButton.classList = 'btn btn-sm btn-success ml-2';
-      } else {
-        readButton.innerHTML = 'I have not read the book';
+    readButton.addEventListener('click', () => {
+      if(readstatus) {
+        readButton.textContent = 'I not have read the book';
         readButton.classList = 'btn btn-sm btn-info ml-2';
+        readstatus = false;
+      } else {
+        readButton.innerHTML = 'I have read the book';
+        readButton.classList = 'btn btn-sm btn-success ml-2';
+        readstatus = true;
       }
     });
+
     bookBody.appendChild(title);
     bookBody.appendChild(authorForBook);
     bookBody.appendChild(numOfPages);
