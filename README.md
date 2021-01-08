@@ -36,7 +36,7 @@ And run the app on your local machine in the browser of your choice.
 
 - Github: [@Abhigyan001](https://github.com/Abhigyan001)
 - Twitter: [@abhigyan_001](https://twitter.com/abhigyan_001)
-- LinkedIn: [Abhigyan](https://www.linkedin.com/in/abhigyan-mahanta-b49799145/)
+- LinkedIn: [Abhigyan](https://www.linkedin.com/in/abhigyanmahanta/)
 
 👤 Clayton Siby
 - Github: [@Clayton Siby](https://github.com/ClaytonSiby)
